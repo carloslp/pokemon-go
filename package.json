@@ -2,6 +2,7 @@
   "name": "pokemon-go-trainers",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/backend",
     "packages/frontend"
