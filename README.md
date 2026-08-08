@@ -42,9 +42,16 @@ npm install
 | `VITE_TURNSTILE_SITE_KEY` | Cloudflare Turnstile **site** key |
 | `VITE_API_BASE_URL` | API base URL (default `/api`, proxied by Vite dev server) |
 
-### 3. Create Supabase table
+### 3. Run the Supabase setup script
 
-Run the SQL from [`packages/backend/README.md`](packages/backend/README.md) in your Supabase SQL editor.
+Open the Supabase SQL editor for your project and run
+[`packages/backend/supabase/schema.sql`](packages/backend/supabase/schema.sql).
+
+That script:
+- enables `pgcrypto` for `gen_random_uuid()`
+- creates the `public.trainers` table
+- enables Row Level Security on the table
+- creates the public read policy used by the app
 
 ### 4. Run development servers
 
