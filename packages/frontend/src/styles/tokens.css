@@ -1,0 +1,297 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Design Tokens – Pokemon GO Trainer Directory
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Brand */
+  --color-primary:       #2a9d8f;
+  --color-primary-dark:  #1f7a6e;
+
+  /* Teams */
+  --color-mystic:        #0055ff;
+  --color-mystic-bg:     #e6edff;
+  --color-valor:         #ff0000;
+  --color-valor-bg:      #ffe6e6;
+  --color-instinct:      #ffcc00;
+  --color-instinct-bg:   #fff9d6;
+
+  /* Backgrounds */
+  --color-bg:            #f4f5f7;
+  --color-surface:       #ffffff;
+
+  /* Text */
+  --color-text:          #1c1c1e;
+  --color-text-secondary:#6c6c70;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px 0 rgba(0, 0, 0, 0.10);
+  --shadow-btn:  0 2px 8px 0 rgba(42, 157, 143, 0.30);
+
+  /* Radius */
+  --radius-card: 16px;
+  --radius-btn:  9999px;
+  --radius-btn-ghost: 10px;
+  --radius-input: 12px;
+
+  /* Spacing (multiples of 8) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+
+  /* Typography */
+  --font-family: 'Lato', 'Roboto', sans-serif;
+  --line-height-body: 1.5;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:      #121212;
+    --color-surface: #1e1e1e;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Reset & Base
+   ───────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-family);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: var(--line-height-body);
+  min-height: 100dvh;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Layout
+   ───────────────────────────────────────────────────────────────────────── */
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .page { padding: var(--space-4); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Typography
+   ───────────────────────────────────────────────────────────────────────── */
+h1 { font-size: 2rem;   font-weight: 900; color: var(--color-text); }
+h2 { font-size: 1.4rem; font-weight: 700; color: var(--color-text); }
+p, label, small { color: var(--color-text-secondary); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Cards
+   ───────────────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-3);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Form
+   ───────────────────────────────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: var(--radius-input);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  appearance: none;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236C6C70' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Buttons
+   ───────────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--space-3);
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s;
+  width: 100%;
+}
+
+.btn-primary:hover  { background: var(--color-primary-dark); }
+.btn-primary:active { transform: scale(0.95); }
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: 1.5px solid #d1d5db;
+  border-radius: var(--radius-btn-ghost);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-copy:hover  { border-color: var(--color-primary); color: var(--color-primary); }
+.btn-copy:active { transform: scale(0.95); }
+.btn-copy.copied {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transition: color 1.5s, border-color 1.5s;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Team Badge
+   ───────────────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.badge-mystic    { background: var(--color-mystic-bg);    color: var(--color-mystic); }
+.badge-valor     { background: var(--color-valor-bg);     color: var(--color-valor); }
+.badge-instinct  { background: var(--color-instinct-bg);  color: #a07c00; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Trainer Card
+   ───────────────────────────────────────────────────────────────────────── */
+.trainer-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.trainer-card__avatar {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.trainer-card__avatar--mystic   { background: var(--color-mystic-bg); }
+.trainer-card__avatar--valor    { background: var(--color-valor-bg); }
+.trainer-card__avatar--instinct { background: var(--color-instinct-bg); }
+
+.trainer-card__info { flex: 1; min-width: 0; }
+
+.trainer-card__name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trainer-card__meta {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.trainer-card__code {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: monospace;
+  color: var(--color-text);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Utilities
+   ───────────────────────────────────────────────────────────────────────── */
+.stack { display: flex; flex-direction: column; gap: var(--space-2); }
+.text-center { text-align: center; }
+
+.alert {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+.alert-error   { background: var(--color-valor-bg);    color: var(--color-valor); }
+.alert-success { background: #d1fae5; color: #065f46; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Header
+   ───────────────────────────────────────────────────────────────────────── */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.app-header__logo {
+  font-size: 2.5rem;
+}
+
+.app-header__subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+}
