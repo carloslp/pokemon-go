@@ -6,9 +6,12 @@ A monorepo with a **React frontend** and a **Node/Express backend** for register
 
 ```
 pokemon-go/
+├── api/
+│   └── index.js   – Vercel Serverless Function (Express app)
 ├── packages/
-│   ├── backend/   – Express API (Supabase + Cloudflare Turnstile)
+│   ├── backend/   – Express API source (Supabase + Cloudflare Turnstile)
 │   └── frontend/  – Vite + React SPA
+├── vercel.json    – Vercel build & routing configuration
 └── package.json   – npm workspaces root
 ```
 
@@ -52,6 +55,50 @@ npm run dev
 Opens:
 - Frontend → http://localhost:5173
 - Backend  → http://localhost:3001
+
+## Deploy to Vercel
+
+This project is fully compatible with [Vercel](https://vercel.com). The frontend (Vite + React SPA) is served as a static site and the Express API runs as a Vercel Serverless Function under the `/api` path.
+
+### 1. Push your code to GitHub
+
+Make sure your repository is on GitHub (or GitLab / Bitbucket).
+
+### 2. Import the project in Vercel
+
+1. Go to [vercel.com/new](https://vercel.com/new) and click **Add New → Project**.
+2. Select your GitHub repository and click **Import**.
+3. Vercel will auto-detect the settings from `vercel.json`:
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `packages/frontend/dist`
+4. Click **Deploy** — leave framework preset as **Other**.
+
+### 3. Set environment variables in Vercel
+
+In your project's **Settings → Environment Variables**, add:
+
+| Variable | Description |
+|---|---|
+| `SUPABASE_URL` | Your Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service-role key (server-only, never exposed to the browser) |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile **secret** key |
+| `ALLOWED_ORIGINS` | Your Vercel deployment URL (e.g. `https://your-app.vercel.app`) |
+| `VITE_TURNSTILE_SITE_KEY` | Cloudflare Turnstile **site** key |
+| `VITE_API_BASE_URL` | `/api` (the default; no change needed) |
+
+> **Tip**: `VITE_*` variables are embedded into the frontend bundle at build time. All other variables are only available server-side in the Serverless Function.
+
+### 4. Redeploy
+
+After saving the environment variables, trigger a new deployment (**Deployments → Redeploy**) so the frontend is rebuilt with the correct `VITE_*` values.
+
+### 5. Verify
+
+- `https://your-app.vercel.app` → React SPA
+- `https://your-app.vercel.app/api/health` → `{"status":"ok"}`
+- `https://your-app.vercel.app/api/trainers` → JSON list of trainers
+
+---
 
 ## Design system
 
