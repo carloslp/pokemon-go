@@ -14,16 +14,43 @@ const supabase = createClient(
 );
 
 // ── CORS ────────────────────────────────────────────────────────────────────
-const allowedOrigins = process.env.ALLOWED_ORIGINS
+const rawOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
   : ['http://localhost:5173'];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'OPTIONS'],
-  })
-);
+/**
+ * Build a cors `origin` option that supports:
+ *  - exact strings  → 'https://example.com'
+ *  - glob-style wildcards  → 'https://*.vercel.app'
+ */
+function buildCorsOrigin(origins) {
+  const matchers = origins.map((o) => {
+    if (!o.includes('*')) return o;
+    // Convert 'https://*.vercel.app' to a RegExp
+    const escaped = o.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '[^.]+');
+    return new RegExp(`^${escaped}$`);
+  });
+
+  return function (origin, callback) {
+    // Allow requests with no origin (e.g. curl, server-to-server)
+    if (!origin) return callback(null, true);
+    const allowed = matchers.some((m) =>
+      typeof m === 'string' ? m === origin : m.test(origin)
+    );
+    if (allowed) return callback(null, true);
+    callback(new Error(`CORS: origin '${origin}' is not allowed`));
+  };
+}
+
+const corsOptions = {
+  origin: buildCorsOrigin(rawOrigins),
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOptions));
+// Explicit preflight handler for all routes
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
