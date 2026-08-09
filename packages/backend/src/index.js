@@ -16,7 +16,7 @@ const supabase = createClient(
 // ── CORS ────────────────────────────────────────────────────────────────────
 const rawOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',').map((o) => o.trim())
-  : ['http://localhost:5173'];
+  : ['http://localhost:5173', 'https://*.vercel.app'];
 
 /**
  * Build a cors `origin` option that supports:
