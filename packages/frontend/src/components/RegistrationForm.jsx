@@ -34,6 +34,10 @@ export default function RegistrationForm({ onSuccess }) {
 
   const handleTurnstileVerify = useCallback((token) => setTurnstileToken(token), []);
   const handleTurnstileExpire = useCallback(() => setTurnstileToken(null), []);
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken(null);
+    setError('Security challenge failed to load. Please refresh the page and try again.');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -126,7 +130,7 @@ export default function RegistrationForm({ onSuccess }) {
         </select>
       </div>
 
-      <TurnstileWidget onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} />
+      <TurnstileWidget onVerify={handleTurnstileVerify} onExpire={handleTurnstileExpire} onError={handleTurnstileError} />
 
       <button type="submit" className="btn-primary" disabled={loading}>
         {loading ? 'Registering…' : 'Register'}
