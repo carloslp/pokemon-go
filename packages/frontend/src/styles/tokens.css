@@ -294,6 +294,57 @@ label {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
+   Trainer Table
+   ───────────────────────────────────────────────────────────────────────── */
+.trainer-filters {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.trainer-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-input);
+}
+
+.trainer-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--color-surface);
+}
+
+.trainer-table th,
+.trainer-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-input-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.trainer-table th {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+}
+
+.trainer-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.trainer-table__code {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: monospace;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
    Utilities
    ───────────────────────────────────────────────────────────────────────── */
 .stack { display: flex; flex-direction: column; gap: var(--space-2); }

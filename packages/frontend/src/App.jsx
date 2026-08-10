@@ -5,9 +5,11 @@ import TrainerList from './components/TrainerList.jsx';
 export default function App() {
   const [refresh, setRefresh] = useState(0);
   const [successMsg, setSuccessMsg] = useState(null);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const handleSuccess = (trainer) => {
     setSuccessMsg(`Welcome, ${trainer.username}! You've been added to the directory.`);
+    setIsFormVisible(false);
     setRefresh((n) => n + 1);
     setTimeout(() => setSuccessMsg(null), 4000);
   };
@@ -29,7 +31,23 @@ export default function App() {
       )}
 
       <div className="stack">
-        <RegistrationForm onSuccess={handleSuccess} />
+        <section className="stack">
+          <button
+            type="button"
+            className="btn-primary"
+            onClick={() => setIsFormVisible((visible) => !visible)}
+            aria-expanded={isFormVisible}
+            aria-controls="registration-form"
+          >
+            {isFormVisible ? 'Hide registration form' : 'Add trainer'}
+          </button>
+
+          {isFormVisible && (
+            <div id="registration-form">
+              <RegistrationForm onSuccess={handleSuccess} />
+            </div>
+          )}
+        </section>
 
         <section>
           <h2 style={{ marginBottom: 'var(--space-2)' }}>Registered Trainers</h2>
