@@ -383,6 +383,14 @@ label {
 @media (max-width: 600px) {
   .app-header__logo { font-size: 2rem; }
 
+  .page {
+    padding: var(--space-2) var(--space-1);
+  }
+
+  .card {
+    padding: var(--space-2);
+  }
+
   /* Stack trainer table as cards on small screens */
   .trainer-table-wrapper {
     border: none;
@@ -412,9 +420,12 @@ label {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 0;
+    padding: 8px 0;
     border-bottom: 1px solid var(--color-input-border);
     font-size: 0.9rem;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    word-break: break-word;
   }
 
   .trainer-table td:last-child { border-bottom: none; }
@@ -435,5 +446,11 @@ label {
   /* Filters: 2 columns on mobile */
   .trainer-filters {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .trainer-filters {
+    grid-template-columns: 1fr;
   }
 }
