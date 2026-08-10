@@ -98,8 +98,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-headings);
   color: var(--color-text);
 }
-h1 { font-size: 2.2rem;   font-weight: 700; }
-h2 { font-size: 1.5rem;   font-weight: 600; }
+h1 { font-size: clamp(1.5rem, 5vw, 2.2rem); font-weight: 700; }
+h2 { font-size: clamp(1.2rem, 4vw, 1.5rem); font-weight: 600; }
 p, label, small {
   font-family: var(--font-family);
   color: var(--color-text-secondary);
@@ -375,4 +375,65 @@ label {
 .app-header__subtitle {
   font-size: 0.9375rem;
   color: var(--color-text-secondary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Responsive – Mobile-first overrides (max-width: 600px)
+   ───────────────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .app-header__logo { font-size: 2rem; }
+
+  /* Stack trainer table as cards on small screens */
+  .trainer-table-wrapper {
+    border: none;
+    border-radius: 0;
+    overflow-x: visible;
+  }
+
+  .trainer-table,
+  .trainer-table tbody,
+  .trainer-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .trainer-table thead { display: none; }
+
+  .trainer-table tr {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    border: var(--border-card);
+    padding: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .trainer-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--color-input-border);
+    font-size: 0.9rem;
+  }
+
+  .trainer-table td:last-child { border-bottom: none; }
+
+  .trainer-table td::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+    margin-right: var(--space-2);
+  }
+
+  .trainer-table__code { flex-wrap: wrap; gap: 6px; }
+
+  /* Filters: 2 columns on mobile */
+  .trainer-filters {
+    grid-template-columns: 1fr 1fr;
+  }
 }

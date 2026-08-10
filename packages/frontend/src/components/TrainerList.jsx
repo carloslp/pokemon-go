@@ -183,18 +183,18 @@ export default function TrainerList({ refresh }) {
             <tbody>
               {filteredTrainers.map((trainer) => (
                 <tr key={trainer.id}>
-                  <td>{trainer.username}</td>
-                  <td>
+                  <td data-label="Trainer">{trainer.username}</td>
+                  <td data-label="Code">
                     <div className="trainer-table__code">
                       <span>{prettyCode(trainer.trainer_code)}</span>
                       <CopyButton text={trainer.trainer_code} />
                     </div>
                   </td>
-                  <td>
+                  <td data-label="Team">
                     <span className={`badge badge-${trainer.team}`}>{TEAM_LABEL[trainer.team] ?? trainer.team}</span>
                   </td>
-                  <td>{trainer.city || '—'}</td>
-                  <td>{trainer.country || '—'}</td>
+                  <td data-label="City">{trainer.city || '—'}</td>
+                  <td data-label="Country">{trainer.country || '—'}</td>
                 </tr>
               ))}
             </tbody>
