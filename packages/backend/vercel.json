@@ -13,7 +13,7 @@
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://pokemon-go-frontend.vercel.app,pokemongo.cgve.app" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://pokemon-go-frontend.vercel.app,https://pokemongo.cgve.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
       ]
