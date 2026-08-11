@@ -31,7 +31,7 @@ export default function App() {
       )}
 
       <div className="stack">
-        <section className="stack">
+        <section id="register-section" className="stack">
           <button
             type="button"
             className="btn-primary"
@@ -49,11 +49,31 @@ export default function App() {
           )}
         </section>
 
-        <section>
+        <section id="trainers-section">
           <h2 style={{ marginBottom: 'var(--space-2)' }}>Registered Trainers</h2>
           <TrainerList refresh={refresh} />
         </section>
       </div>
+
+      <nav className="bottom-nav" aria-label="Primary">
+        <button
+          type="button"
+          className="bottom-nav__item"
+          onClick={() => {
+            setIsFormVisible(true);
+            document.getElementById('register-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+        >
+          Register
+        </button>
+        <button
+          type="button"
+          className="bottom-nav__item"
+          onClick={() => document.getElementById('trainers-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+        >
+          Trainers
+        </button>
+      </nav>
     </main>
   );
 }
